@@ -57,6 +57,7 @@ public class Problem {
 			if (schrittweite == 0) {
 				break;
 			}
+
 			schrittweite /= 2;
 		}
 		
@@ -82,9 +83,9 @@ public class Problem {
 		System.out.println("\nFlaecheGrassZiege:\t"+flaechegrassziege());
 	}
 
-	public double diff(double changeradius) {
+	public double diff(double changeRadius) {
 		double radius = ziege.getRadius();
-		ziege.setRadius(radius + changeradius);
+		ziege.setRadius(radius + changeRadius);
 //		double diff = Math.PI/2 - flaechegrassziege();
 //		double diff = rechner.Integral(grass, -grass.getRadius(), grass.getRadius()) - flaechegrassziege();
 		double diff = Math.pow(grass.getRadius(), 2)*Math.PI/4 - flaechegrassziege();
@@ -93,7 +94,7 @@ public class Problem {
 	}
 
 	public double flaechegrassziege() {
-		return  (rechner.Integral(grass, grass.getRadius() - ziege.getRadius(), getSchnittstelle())
+		return  (rechner.Integral(grass, ziege.getVerschiebungX() - ziege.getRadius(), getSchnittstelle())
 				+ rechner.Integral(ziege, getSchnittstelle(), grass.getRadius()));
 	}
 
@@ -103,6 +104,6 @@ public class Problem {
 		double r2 = ziege.getRadius();
 		double v1 = grass.getVerschiebungX();
 		double v2 = ziege.getVerschiebungX();
-		return (r2*r2-r1*r1-v2*v2+v1*v1)/(2*(v1-v2));
+		return (r2*r2-(r1*r1)-(v2*v2)+v1*v1)/(2*(v1-v2));
 	}
 }
